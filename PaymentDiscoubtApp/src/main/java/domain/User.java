@@ -40,11 +40,31 @@ public class User {
     }
 
      public void select(){
+         System.out.println("hola, eres el usuario " + "\n"
+                 + "ID: " +this.id + "\n"
+                 + "Nombre: " +this.name + "\n"
+                 + "Apellido: " +this.lasName + "\n"
+                 + "Correo: " +this.email + "\n"
+                 + "Telefono: " +this.phone + "\n"
+                 + "Estado: " +this.status + "\n"
+         );
+
+     }
+
+    public void selectById(int id){
+
+    }
+
+    public void update(){
+
+    }
+
+    public void delete(){
 
     }
 
     //Helper
-    private boolean setStatus(int state){
+    protected boolean setStatus(int state){
         if (state == 1){
             return true;
         } else {
