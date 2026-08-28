@@ -1,11 +1,6 @@
 package app.domain;
 
-/**
- * Pilar POO: Abstracción y Encapsulamiento.
- * Principio Liskov Substitution (LSP):
- * Clase base abstracta para cualquier actor humano en el sistema.
- */
-public abstract class Persona {
+public class Persona {
     private int id;
     private String nombre;
     private String correo;
@@ -21,7 +16,6 @@ public abstract class Persona {
         this.telefono = telefono;
     }
 
-    // Getters y Setters con Encapsulamiento
     public int getId() {
         return id;
     }
@@ -35,10 +29,7 @@ public abstract class Persona {
     }
 
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío");
-        }
-        this.nombre = nombre.trim();
+        this.nombre = nombre;
     }
 
     public String getCorreo() {
@@ -57,13 +48,8 @@ public abstract class Persona {
         this.telefono = telefono;
     }
 
-    /**
-     * Método polimórfico que entrega la descripción de la persona según su tipo.
-     */
-    public abstract String getTipoPersona();
-
     @Override
     public String toString() {
-        return getTipoPersona() + " [ID=" + id + ", Nombre='" + nombre + "', Correo='" + correo + "']";
+        return "Persona: " + nombre + " (Correo: " + correo + ", Tel: " + telefono + ")";
     }
 }
