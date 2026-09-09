@@ -3,13 +3,13 @@ package app.domain;
 public class Person extends User {
 
     private String ocuppation;
-    private String salary;
+    private double salary;
 
     public Person() {
         super();
     }
 
-    public Person(Integer id, String name, String lastName, DocumentTypeEnum documentType, String email, String password, boolean state, String ocuppation, String salary) {
+    public Person(Integer id, String name, String lastName, DocumentTypeEnum documentType, String email, String password, boolean state, String ocuppation, double salary) {
         super(id, name, lastName, documentType, email, password, state);
         this.ocuppation = ocuppation;
         this.salary = salary;
