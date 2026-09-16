@@ -3,12 +3,14 @@ package app.view;
 import app.domain.DocumentTypeEnum;
 import app.service.helpers.SetDocumentType;
 import app.service.inputports.UserUseCase;
+import app.utils.FormRuleValidators;
 
 import java.util.Scanner;
 
 public class PersonView {
     Scanner sc = new Scanner(System.in);
 
+    //patron singleton
     private final UserUseCase userUseCase;
 
     PersonView(UserUseCase userUseCase){
@@ -20,36 +22,15 @@ public class PersonView {
     }
 
     public void createPerson(){
-        System.out.println("Creating Person");
-
-        System.out.println("ingrese el id del cliente:");
-
-        Integer id = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("ingrese el nombre del cliente:");
-        String name = sc.nextLine();
-
-        System.out.println("ingrese el apellido del cliente:");
-        String lastname = sc.nextLine();
-
-        System.out.println("ingrese el tipo del documento:");
-        String documento = SetDocumentType.getDocumentType();
-
-        System.out.println("ingrese el email del cliente:");
-        String email = sc.nextLine();
-
-        System.out.println("ingrese el password del cliente:");
-        String password = sc.nextLine();
-
-        System.out.println("ingrese el estado del cliente:");
-        Boolean estado = sc.nextBoolean();
-
-        System.out.println("ingrese la ocupacion del cliente:");
-        String ocupacion = sc.nextLine();
-
-        System.out.println("ingrese el salario del cliente:");
-        double salario = sc.nextDouble();
+        int id = FormRuleValidators.validateInt("Ingrese el nombre de la persona: ");
+        String name = FormRuleValidators.validateString("Ingrese el nombre de la persona: ");
+        String lastname = FormRuleValidators.validateString("Ingrese el apellido de la persona: ");
+        String documento = FormRuleValidators.validateDocument("Ingrese el documento donde 1 es cedula, 2 pasaporte, 3 cedula extranjeria, 4 nit ");
+        String email = FormRuleValidators.validateString("Ingrese el email de la persona: ");
+        String password = FormRuleValidators.validateString("Password: ");
+        Boolean estado = FormRuleValidators.validateBoolean("Estado: ");
+        String ocupacion = FormRuleValidators.validateString("Ocupacion: ");
+        double salario = FormRuleValidators.validateDouble("salario: ");
 
         userUseCase.createPerson(id, name, lastname, DocumentTypeEnum.valueOf(documento), email, password, estado, ocupacion, salario);
     }

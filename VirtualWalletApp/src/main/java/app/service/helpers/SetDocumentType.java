@@ -3,8 +3,8 @@ package app.service.helpers;
 import app.domain.DocumentTypeEnum;
 
 public class SetDocumentType {
-    public static String getDocumentType() {
-        int option = 0;
+    public static String getDocumentType(int option) {
+        option = 0;
         String value = "";
         switch (option) {
             case 1:
