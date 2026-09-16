@@ -1,7 +1,6 @@
 package app.view;
 
 import app.domain.DocumentTypeEnum;
-import app.service.helpers.SetDocumentType;
 import app.service.inputports.UserUseCase;
 import app.utils.FormRuleValidators;
 
