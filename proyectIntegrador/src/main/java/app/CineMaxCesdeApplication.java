@@ -2,9 +2,10 @@ package app;
 
 import app.domain.*;
 
-public class App {
+public class CineMaxCesdeApplication {
+
     public static void main(String[] args) {
-        System.out.println("=== SISTEMA DE CINE - CESDE ===\n");
+        System.out.println("=== SISTEMA DE CINE - CINEMAX CESDE ===\n");
 
         Pelicula peli1 = new Pelicula(1, "Deadpool & Wolverine", "Acción", 127, 15000.0, 18);
         Pelicula peli2 = new Pelicula(2, "Intensamente 2", "Animación", 100, 12000.0, 0);
