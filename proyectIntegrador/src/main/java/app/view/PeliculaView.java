@@ -1,6 +1,8 @@
 package app.view;
 
 import app.domain.Pelicula;
+import app.domain.enums.GeneroPelicula;
+import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.PeliculaServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -16,7 +18,11 @@ public class PeliculaView {
         System.out.println("\n--- REGISTRAR PELÍCULA EN CARTELERA ---");
         int id = FormTypeValidator.readInt("Ingrese el ID de la película: ");
         String titulo = FormTypeValidator.readString("Ingrese el Título: ");
-        String genero = FormTypeValidator.readString("Ingrese el Género (Acción, Comedia, Terror, etc.): ");
+
+        // 🌟 Uso de SetPropertyHelper: Menú interactivo con Enum
+        GeneroPelicula generoSeleccionado = SetPropertyHelper.setGeneroPelicula();
+        String genero = generoSeleccionado.getDescripcion();
+
         int duracion = FormTypeValidator.readInt("Ingrese la Duración (minutos): ");
         double precio = FormTypeValidator.readDouble("Ingrese el Precio Base: ");
         int edadMinima = FormTypeValidator.readInt("Ingrese la Edad Mínima (0 para todo público, 18 para adultos): ");
@@ -63,7 +69,11 @@ public class PeliculaView {
         }
 
         String nuevoTitulo = FormTypeValidator.readString("Ingrese el nuevo Título: ");
-        String nuevoGenero = FormTypeValidator.readString("Ingrese el nuevo Género: ");
+        
+        // 🌟 Uso de SetPropertyHelper en actualización
+        GeneroPelicula generoSeleccionado = SetPropertyHelper.setGeneroPelicula();
+        String nuevoGenero = generoSeleccionado.getDescripcion();
+
         int nuevaDuracion = FormTypeValidator.readInt("Ingrese la nueva Duración (minutos): ");
         double nuevoPrecio = FormTypeValidator.readDouble("Ingrese el nuevo Precio Base: ");
         int nuevaEdadMin = FormTypeValidator.readInt("Ingrese la nueva Edad Mínima: ");

@@ -1,6 +1,8 @@
 package app.view;
 
 import app.domain.Sala;
+import app.domain.enums.TipoSala;
+import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.SalaServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -15,10 +17,13 @@ public class SalaView {
     public void createSala() {
         System.out.println("\n--- REGISTRAR SALA ---");
         int id = FormTypeValidator.readInt("Ingrese el ID de la sala: ");
-        String nombre = FormTypeValidator.readString("Ingrese el Nombre de la sala (ej: Sala 1, Sala VIP): ");
+        String nombre = FormTypeValidator.readString("Ingrese el Nombre de la sala (ej: Sala 1, Sala Principal): ");
         int capacidad = FormTypeValidator.readInt("Ingrese la Capacidad de asientos: ");
-        String tipo = FormTypeValidator.readString("Ingrese el Tipo de sala (2D, 3D, VIP, IMAX): ");
-        double recargo = FormTypeValidator.readDouble("Ingrese el Recargo adicional por tipo de sala: ");
+
+        // 🌟 Uso de SetPropertyHelper: Menú para elegir tipo y obtener recargo automáticamente
+        TipoSala tipoSala = SetPropertyHelper.setTipoSala();
+        String tipo = tipoSala.getDescripcion();
+        double recargo = tipoSala.getRecargo();
 
         // Paso 14 y 15: Pasa los parámetros capturados al create del servicio
         Sala creada = salaService.create(id, nombre, capacidad, tipo, recargo);
@@ -63,8 +68,11 @@ public class SalaView {
 
         String nuevoNombre = FormTypeValidator.readString("Ingrese el nuevo Nombre: ");
         int nuevaCapacidad = FormTypeValidator.readInt("Ingrese la nueva Capacidad: ");
-        String nuevoTipo = FormTypeValidator.readString("Ingrese el nuevo Tipo: ");
-        double nuevoRecargo = FormTypeValidator.readDouble("Ingrese el nuevo Recargo: ");
+
+        // 🌟 Uso de SetPropertyHelper en actualización
+        TipoSala tipoSala = SetPropertyHelper.setTipoSala();
+        String nuevoTipo = tipoSala.getDescripcion();
+        double nuevoRecargo = tipoSala.getRecargo();
 
         Sala salaActualizada = new Sala(id, nuevoNombre, nuevaCapacidad, nuevoTipo, nuevoRecargo);
         salaService.update(id, salaActualizada);
