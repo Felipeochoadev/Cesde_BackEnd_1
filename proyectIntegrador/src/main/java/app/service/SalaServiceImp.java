@@ -13,7 +13,8 @@ public class SalaServiceImp implements SalaServiceInterface {
     }
 
     @Override
-    public Sala create(Sala sala) {
+    public Sala create(int id, String nombre, int capacidad, String tipo, double recargo) {
+        Sala sala = new Sala(id, nombre, capacidad, tipo, recargo);
         return salaRepository.create(sala);
     }
 

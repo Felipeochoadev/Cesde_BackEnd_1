@@ -13,7 +13,8 @@ public class PeliculaServiceImp implements PeliculaServiceInterface {
     }
 
     @Override
-    public Pelicula create(Pelicula pelicula) {
+    public Pelicula create(int id, String titulo, String genero, int duracionMinutos, double precioBase, int edadMinima) {
+        Pelicula pelicula = new Pelicula(id, titulo, genero, duracionMinutos, precioBase, edadMinima);
         return peliculaRepository.create(pelicula);
     }
 

@@ -1,5 +1,7 @@
 package app.service;
 
+import app.domain.Cliente;
+import app.domain.Funcion;
 import app.domain.Reserva;
 import app.service.inputports.ReservaServiceInterface;
 import app.service.ouputports.ReservaRepositoryPort;
@@ -13,7 +15,8 @@ public class ReservaServiceImp implements ReservaServiceInterface {
     }
 
     @Override
-    public Reserva create(Reserva reserva) {
+    public Reserva create(int id, Cliente cliente, Funcion funcion, int cantidadBoletos) {
+        Reserva reserva = new Reserva(id, cliente, funcion, cantidadBoletos);
         return reservaRepository.create(reserva);
     }
 

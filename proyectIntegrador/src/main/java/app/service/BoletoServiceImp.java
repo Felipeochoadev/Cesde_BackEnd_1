@@ -1,6 +1,7 @@
 package app.service;
 
 import app.domain.Boleto;
+import app.domain.Funcion;
 import app.service.inputports.BoletoServiceInterface;
 import app.service.ouputports.BoletoRepositoryPort;
 import java.util.List;
@@ -13,7 +14,8 @@ public class BoletoServiceImp implements BoletoServiceInterface {
     }
 
     @Override
-    public Boleto create(Boleto boleto) {
+    public Boleto create(int id, String codigo, Funcion funcion, String asiento) {
+        Boleto boleto = new Boleto(id, codigo, funcion, asiento);
         return boletoRepository.create(boleto);
     }
 

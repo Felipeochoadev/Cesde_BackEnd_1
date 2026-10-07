@@ -1,6 +1,7 @@
 package app.service;
 
 import app.domain.Factura;
+import app.domain.Reserva;
 import app.service.inputports.FacturaServiceInterface;
 import app.service.ouputports.FacturaRepositoryPort;
 import java.util.List;
@@ -13,7 +14,8 @@ public class FacturaServiceImp implements FacturaServiceInterface {
     }
 
     @Override
-    public Factura create(Factura factura) {
+    public Factura create(int id, String numero, Reserva reserva, String metodoPago) {
+        Factura factura = new Factura(id, numero, reserva, metodoPago);
         return facturaRepository.create(factura);
     }
 

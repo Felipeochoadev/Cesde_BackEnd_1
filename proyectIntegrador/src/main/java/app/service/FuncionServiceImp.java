@@ -1,6 +1,8 @@
 package app.service;
 
 import app.domain.Funcion;
+import app.domain.Pelicula;
+import app.domain.Sala;
 import app.service.inputports.FuncionServiceInterface;
 import app.service.ouputports.FuncionRepositoryPort;
 import java.util.List;
@@ -13,7 +15,8 @@ public class FuncionServiceImp implements FuncionServiceInterface {
     }
 
     @Override
-    public Funcion create(Funcion funcion) {
+    public Funcion create(int id, Pelicula pelicula, Sala sala, String fecha, String hora) {
+        Funcion funcion = new Funcion(id, pelicula, sala, fecha, hora);
         return funcionRepository.create(funcion);
     }
 
