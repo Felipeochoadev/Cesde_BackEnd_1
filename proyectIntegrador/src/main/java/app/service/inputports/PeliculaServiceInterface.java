@@ -4,9 +4,9 @@ import app.domain.Pelicula;
 import java.util.List;
 
 public interface PeliculaServiceInterface {
-    Pelicula buscarPorId(int id);
-
-    Pelicula createPelicula(int id, String titulo, String genero, int duracion, double precio, int edadMin);
-
-    List<Pelicula> listarPeliculas();
+    public Pelicula create(Pelicula pelicula);
+    public Pelicula getById(int id);
+    public List<Pelicula> getAll();
+    public Pelicula update(int id, Pelicula pelicula);
+    public boolean delete(int id);
 }

@@ -6,24 +6,34 @@ import app.service.ouputports.PeliculaRepositoryPort;
 import java.util.List;
 
 public class PeliculaServiceImp implements PeliculaServiceInterface {
-    private PeliculaRepositoryPort repository;
+    private final PeliculaRepositoryPort peliculaRepository;
 
-    public PeliculaServiceImp(PeliculaRepositoryPort repository) {
-        this.repository = repository;
+    public PeliculaServiceImp(PeliculaRepositoryPort peliculaRepository) {
+        this.peliculaRepository = peliculaRepository;
     }
 
     @Override
-    public Pelicula buscarPorId(int id) {
-        return null;
+    public Pelicula create(Pelicula pelicula) {
+        return peliculaRepository.create(pelicula);
     }
 
     @Override
-    public Pelicula createPelicula(int id, String titulo, String genero, int duracion, double precio, int edadMin) {
-        return null;
+    public Pelicula getById(int id) {
+        return peliculaRepository.getById(id);
     }
 
     @Override
-    public List<Pelicula> listarPeliculas() {
-        return List.of();
+    public List<Pelicula> getAll() {
+        return peliculaRepository.getAll();
+    }
+
+    @Override
+    public Pelicula update(int id, Pelicula pelicula) {
+        return peliculaRepository.update(id, pelicula);
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return peliculaRepository.delete(id);
     }
 }

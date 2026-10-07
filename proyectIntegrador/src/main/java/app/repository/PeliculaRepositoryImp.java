@@ -6,23 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PeliculaRepositoryImp implements PeliculaRepositoryPort {
-    private List<Pelicula> baseDeDatos = new ArrayList<>();
+    private List<Pelicula> dataSource = new ArrayList<>();
 
     @Override
-    public void guardar(Pelicula pelicula) {
-        baseDeDatos.add(pelicula);
+    public Pelicula create(Pelicula pelicula) {
+        dataSource.add(pelicula);
+        return pelicula;
     }
 
     @Override
-    public List<Pelicula> obtenerTodas() {
-        return baseDeDatos;
-    }
-
-    @Override
-    public Pelicula buscarPorId(int id) {
-        for (Pelicula p : baseDeDatos) {
-            if (p.getId() == id) return p;
+    public Pelicula getById(int id) {
+        for (Pelicula p : dataSource) {
+            if (p.getId() == id) {
+                return p;
+            }
         }
         return null;
+    }
+
+    @Override
+    public List<Pelicula> getAll() {
+        return new ArrayList<>(dataSource);
+    }
+
+    @Override
+    public Pelicula update(int id, Pelicula pelicula) {
+        for (int i = 0; i < dataSource.size(); i++) {
+            if (dataSource.get(i).getId() == id) {
+                dataSource.set(i, pelicula);
+                return pelicula;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return dataSource.removeIf(p -> p.getId() == id);
     }
 }
