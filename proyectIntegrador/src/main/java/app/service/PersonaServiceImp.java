@@ -13,8 +13,8 @@ public class PersonaServiceImp implements PersonaServiceInterface {
     }
 
     @Override
-    public Persona create(int id, String nombre, String correo, String telefono) {
-        Persona persona = new Persona(id, nombre, correo, telefono);
+    public Persona create(String nombre, String correo, String telefono) {
+        Persona persona = new Persona(0, nombre, correo, telefono);
         return personaRepository.create(persona);
     }
 

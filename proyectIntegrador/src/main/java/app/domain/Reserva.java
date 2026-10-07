@@ -95,6 +95,18 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva #" + id + " [" + estado + "] - " + cliente.getNombre() + " (" + cantidadBoletos + " boletos) - Total: $" + calcularTotal();
+        String clienteNombre = (cliente != null) ? cliente.getNombre() : "null";
+        String peliculaTitulo = (funcion != null && funcion.getPelicula() != null) ? funcion.getPelicula().getTitulo() : "null";
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"cliente\": \"" + clienteNombre + "\",\n" +
+               "  \"pelicula\": \"" + peliculaTitulo + "\",\n" +
+               "  \"cantidadBoletos\": " + cantidadBoletos + ",\n" +
+               "  \"subtotal\": " + calcularSubtotal() + ",\n" +
+               "  \"descuento\": " + calcularDescuento() + ",\n" +
+               "  \"total\": " + calcularTotal() + ",\n" +
+               "  \"estado\": \"" + estado + "\",\n" +
+               "  \"esValidaPorEdad\": " + esValidaPorEdad() + "\n" +
+               "}";
     }
 }

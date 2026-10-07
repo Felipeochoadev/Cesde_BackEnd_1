@@ -16,19 +16,18 @@ public class ReservaView {
 
     public void createReserva(Cliente cliente, Funcion funcion) {
         System.out.println("\n--- REGISTRAR RESERVA ---");
-        int id = FormTypeValidator.readInt("Ingrese el ID de la reserva: ");
         int cantidadBoletos = FormTypeValidator.readInt("Ingrese la Cantidad de boletos a comprar: ");
 
         if (funcion != null && funcion.getPelicula() != null && !funcion.getPelicula().esAptaPara(cliente.getEdad())) {
-            System.out.println("❌ ERROR: La película '" + funcion.getPelicula().getTitulo() + 
+            System.out.println("Error: La película '" + funcion.getPelicula().getTitulo() + 
                                "' requiere edad mínima de " + funcion.getPelicula().getEdadMinima() + 
                                " años. El cliente tiene " + cliente.getEdad() + " años.");
             return;
         }
 
-        // Paso 14 y 15: Pasa los parámetros capturados al create del servicio
-        Reserva reserva = reservaService.create(id, cliente, funcion, cantidadBoletos);
-        System.out.println("✅ Reserva registrada con éxito: " + reserva);
+        Reserva reserva = reservaService.create(cliente, funcion, cantidadBoletos);
+        System.out.println("Reserva registrada con éxito:");
+        System.out.println(reserva);
         System.out.println("Subtotal:   $" + reserva.calcularSubtotal());
         System.out.println("Descuento: -$" + reserva.calcularDescuento());
         System.out.println("Total:      $" + reserva.calcularTotal());
@@ -43,9 +42,10 @@ public class ReservaView {
     public void selectReservaById(int id) {
         Reserva reserva = reservaService.getById(id);
         if (reserva != null) {
-            System.out.println("Encontrada: " + reserva + " (Estado: " + reserva.getEstado() + ")");
+            System.out.println("Reserva encontrada:");
+            System.out.println(reserva);
         } else {
-            System.out.println("❌ No se encontró ninguna reserva con ID " + id);
+            System.out.println("No se encontró ninguna reserva con ID " + id);
         }
     }
 
@@ -56,18 +56,27 @@ public class ReservaView {
             System.out.println("No hay reservas registradas.");
         } else {
             for (Reserva r : reservas) {
-                System.out.println("• " + r);
+                System.out.println(r);
             }
         }
     }
 
     public void updateReserva(int id, Cliente nuevoCliente, Funcion nuevaFuncion) {
         System.out.println("\n--- ACTUALIZAR RESERVA ID (" + id + ") ---");
-        int nuevaCantidad = FormTypeValidator.readInt("Ingrese la nueva Cantidad de boletos: ");
+        Reserva existente = reservaService.getById(id);
+        if (existente == null) {
+            System.out.println("No existe reserva con ID " + id);
+            return;
+        }
 
-        Reserva actualizada = new Reserva(id, nuevoCliente, nuevaFuncion, nuevaCantidad);
+        int nuevaCantidad = FormTypeValidator.readIntOptional("Ingrese la nueva Cantidad de boletos", existente.getCantidadBoletos());
+        Cliente clienteFinal = (nuevoCliente != null) ? nuevoCliente : existente.getCliente();
+        Funcion funcionFinal = (nuevaFuncion != null) ? nuevaFuncion : existente.getFuncion();
+
+        Reserva actualizada = new Reserva(id, clienteFinal, funcionFinal, nuevaCantidad);
         reservaService.update(id, actualizada);
-        System.out.println("✅ Reserva actualizada con éxito.");
+        System.out.println("Reserva actualizada con éxito:");
+        System.out.println(actualizada);
     }
 
     public void deleteReserva() {
@@ -79,9 +88,9 @@ public class ReservaView {
     public void deleteReserva(int id) {
         boolean eliminada = reservaService.delete(id);
         if (eliminada) {
-            System.out.println("✅ Reserva con ID " + id + " eliminada correctamente.");
+            System.out.println("Reserva con ID " + id + " eliminada correctamente.");
         } else {
-            System.out.println("❌ No se pudo eliminar: ID " + id + " no encontrado.");
+            System.out.println("No se pudo eliminar: ID " + id + " no encontrado.");
         }
     }
 }

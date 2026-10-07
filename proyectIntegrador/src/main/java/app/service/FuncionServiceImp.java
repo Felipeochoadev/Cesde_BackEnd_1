@@ -15,8 +15,8 @@ public class FuncionServiceImp implements FuncionServiceInterface {
     }
 
     @Override
-    public Funcion create(int id, Pelicula pelicula, Sala sala, String fecha, String hora) {
-        Funcion funcion = new Funcion(id, pelicula, sala, fecha, hora);
+    public Funcion create(Pelicula pelicula, Sala sala, String fecha, String hora) {
+        Funcion funcion = new Funcion(0, pelicula, sala, fecha, hora);
         return funcionRepository.create(funcion);
     }
 

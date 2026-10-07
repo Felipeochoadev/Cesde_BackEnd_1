@@ -15,8 +15,8 @@ public class ReservaServiceImp implements ReservaServiceInterface {
     }
 
     @Override
-    public Reserva create(int id, Cliente cliente, Funcion funcion, int cantidadBoletos) {
-        Reserva reserva = new Reserva(id, cliente, funcion, cantidadBoletos);
+    public Reserva create(Cliente cliente, Funcion funcion, int cantidadBoletos) {
+        Reserva reserva = new Reserva(0, cliente, funcion, cantidadBoletos);
         return reservaRepository.create(reserva);
     }
 

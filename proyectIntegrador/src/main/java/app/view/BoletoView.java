@@ -15,13 +15,12 @@ public class BoletoView {
 
     public void createBoleto(Funcion funcion) {
         System.out.println("\n--- EMITIR BOLETO ---");
-        int id = FormTypeValidator.readInt("Ingrese el ID del boleto: ");
         String codigo = FormTypeValidator.readString("Ingrese el Código del boleto (ej: BOL-001): ");
         String asiento = FormTypeValidator.readString("Ingrese el Asiento (ej: F5, A1): ");
 
-        // Paso 14 y 15: Pasa los parámetros capturados al create del servicio
-        Boleto creado = boletoService.create(id, codigo, funcion, asiento);
-        System.out.println("✅ Boleto emitido con éxito: " + creado);
+        Boleto creado = boletoService.create(codigo, funcion, asiento);
+        System.out.println("Boleto emitido con éxito:");
+        System.out.println(creado);
     }
 
     public void selectBoletoById() {
@@ -33,9 +32,10 @@ public class BoletoView {
     public void selectBoletoById(int id) {
         Boleto boleto = boletoService.getById(id);
         if (boleto != null) {
-            System.out.println("Encontrado: " + boleto);
+            System.out.println("Boleto encontrado:");
+            System.out.println(boleto);
         } else {
-            System.out.println("❌ No se encontró ningún boleto con ID " + id);
+            System.out.println("No se encontró ningún boleto con ID " + id);
         }
     }
 
@@ -46,19 +46,27 @@ public class BoletoView {
             System.out.println("No hay boletos emitidos actualmente.");
         } else {
             for (Boleto b : boletos) {
-                System.out.println("• " + b);
+                System.out.println(b);
             }
         }
     }
 
     public void updateBoleto(int id, Funcion funcionActualizada) {
         System.out.println("\n--- ACTUALIZAR BOLETO ID (" + id + ") ---");
-        String nuevoCodigo = FormTypeValidator.readString("Ingrese el nuevo Código del boleto: ");
-        String nuevoAsiento = FormTypeValidator.readString("Ingrese el nuevo Asiento: ");
+        Boleto existente = boletoService.getById(id);
+        if (existente == null) {
+            System.out.println("No existe boleto con ID " + id);
+            return;
+        }
 
-        Boleto actualizado = new Boleto(id, nuevoCodigo, funcionActualizada, nuevoAsiento);
+        String nuevoCodigo = FormTypeValidator.readStringOptional("Ingrese el nuevo Código del boleto", existente.getCodigo());
+        String nuevoAsiento = FormTypeValidator.readStringOptional("Ingrese el nuevo Asiento", existente.getAsiento());
+        Funcion funcionFinal = (funcionActualizada != null) ? funcionActualizada : existente.getFuncion();
+
+        Boleto actualizado = new Boleto(id, nuevoCodigo, funcionFinal, nuevoAsiento);
         boletoService.update(id, actualizado);
-        System.out.println("✅ Boleto actualizado con éxito.");
+        System.out.println("Boleto actualizado con éxito:");
+        System.out.println(actualizado);
     }
 
     public void deleteBoleto() {
@@ -70,9 +78,9 @@ public class BoletoView {
     public void deleteBoleto(int id) {
         boolean eliminado = boletoService.delete(id);
         if (eliminado) {
-            System.out.println("✅ Boleto con ID " + id + " eliminado correctamente.");
+            System.out.println("Boleto con ID " + id + " eliminado correctamente.");
         } else {
-            System.out.println("❌ No se pudo eliminar: ID " + id + " no encontrado.");
+            System.out.println("No se pudo eliminar: ID " + id + " no encontrado.");
         }
     }
 }

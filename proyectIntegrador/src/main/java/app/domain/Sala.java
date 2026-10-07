@@ -60,6 +60,12 @@ public class Sala {
 
     @Override
     public String toString() {
-        return nombre + " [" + tipo + " - Capacidad: " + capacidad + "]";
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"nombre\": \"" + nombre + "\",\n" +
+               "  \"capacidad\": " + capacidad + ",\n" +
+               "  \"tipo\": \"" + tipo + "\",\n" +
+               "  \"recargo\": " + recargo + "\n" +
+               "}";
     }
 }

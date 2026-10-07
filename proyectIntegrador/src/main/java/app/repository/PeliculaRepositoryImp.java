@@ -7,9 +7,11 @@ import java.util.List;
 
 public class PeliculaRepositoryImp implements PeliculaRepositoryPort {
     private List<Pelicula> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Pelicula create(Pelicula pelicula) {
+        pelicula.setId(++currentId);
         dataSource.add(pelicula);
         return pelicula;
     }
@@ -33,6 +35,7 @@ public class PeliculaRepositoryImp implements PeliculaRepositoryPort {
     public Pelicula update(int id, Pelicula pelicula) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                pelicula.setId(id);
                 dataSource.set(i, pelicula);
                 return pelicula;
             }

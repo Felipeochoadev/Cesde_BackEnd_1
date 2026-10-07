@@ -7,9 +7,11 @@ import java.util.List;
 
 public class FuncionRepositoryImp implements FuncionRepositoryPort {
     private List<Funcion> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Funcion create(Funcion funcion) {
+        funcion.setId(++currentId);
         dataSource.add(funcion);
         return funcion;
     }
@@ -33,6 +35,7 @@ public class FuncionRepositoryImp implements FuncionRepositoryPort {
     public Funcion update(int id, Funcion funcion) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                funcion.setId(id);
                 dataSource.set(i, funcion);
                 return funcion;
             }

@@ -13,8 +13,8 @@ public class ClienteServiceImp implements ClienteServiceInterface {
     }
 
     @Override
-    public Cliente create(int id, String nombre, String correo, String telefono, int edad) {
-        Cliente cliente = new Cliente(id, nombre, correo, telefono, edad);
+    public Cliente create(String nombre, String correo, String telefono, int edad) {
+        Cliente cliente = new Cliente(0, nombre, correo, telefono, edad);
         return clienteRepository.create(cliente);
     }
 

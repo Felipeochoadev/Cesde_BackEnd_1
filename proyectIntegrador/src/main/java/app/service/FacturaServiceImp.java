@@ -14,8 +14,8 @@ public class FacturaServiceImp implements FacturaServiceInterface {
     }
 
     @Override
-    public Factura create(int id, String numero, Reserva reserva, String metodoPago) {
-        Factura factura = new Factura(id, numero, reserva, metodoPago);
+    public Factura create(String numero, Reserva reserva, String metodoPago) {
+        Factura factura = new Factura(0, numero, reserva, metodoPago);
         return facturaRepository.create(factura);
     }
 

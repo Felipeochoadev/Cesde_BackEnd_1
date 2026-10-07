@@ -7,9 +7,11 @@ import java.util.List;
 
 public class SalaRepositoryImp implements SalaRepositoryPort {
     private List<Sala> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Sala create(Sala sala) {
+        sala.setId(++currentId);
         dataSource.add(sala);
         return sala;
     }
@@ -33,6 +35,7 @@ public class SalaRepositoryImp implements SalaRepositoryPort {
     public Sala update(int id, Sala sala) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                sala.setId(id);
                 dataSource.set(i, sala);
                 return sala;
             }

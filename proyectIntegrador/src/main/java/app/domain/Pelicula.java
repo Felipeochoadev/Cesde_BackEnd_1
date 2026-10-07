@@ -74,6 +74,13 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return titulo + " (" + genero + ", " + duracionMinutos + " min) - $" + precioBase;
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"titulo\": \"" + titulo + "\",\n" +
+               "  \"genero\": \"" + genero + "\",\n" +
+               "  \"duracionMinutos\": " + duracionMinutos + ",\n" +
+               "  \"precioBase\": " + precioBase + ",\n" +
+               "  \"edadMinima\": " + edadMinima + "\n" +
+               "}";
     }
 }

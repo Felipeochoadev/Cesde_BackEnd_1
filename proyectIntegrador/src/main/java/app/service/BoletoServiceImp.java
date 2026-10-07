@@ -14,8 +14,8 @@ public class BoletoServiceImp implements BoletoServiceInterface {
     }
 
     @Override
-    public Boleto create(int id, String codigo, Funcion funcion, String asiento) {
-        Boleto boleto = new Boleto(id, codigo, funcion, asiento);
+    public Boleto create(String codigo, Funcion funcion, String asiento) {
+        Boleto boleto = new Boleto(0, codigo, funcion, asiento);
         return boletoRepository.create(boleto);
     }
 

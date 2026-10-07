@@ -12,18 +12,15 @@ public class PersonaView {
         this.personaService = personaService;
     }
 
-    /**
-     * Paso 13 y 14: Captura los datos con FormTypeValidator y llama al servicio create()
-     */
     public void createPersona() {
         System.out.println("\n--- REGISTRAR PERSONA ---");
-        int id = FormTypeValidator.readInt("Ingrese el ID de la persona: ");
         String nombre = FormTypeValidator.readString("Ingrese el Nombre: ");
         String correo = FormTypeValidator.readString("Ingrese el Correo electrónico: ");
         String telefono = FormTypeValidator.readString("Ingrese el Teléfono: ");
 
-        Persona creada = personaService.create(id, nombre, correo, telefono);
-        System.out.println("✅ Persona creada y guardada con éxito en el sistema: " + creada);
+        Persona creada = personaService.create(nombre, correo, telefono);
+        System.out.println("Persona registrada con éxito:");
+        System.out.println(creada);
     }
 
     public void selectPersonaById() {
@@ -35,9 +32,10 @@ public class PersonaView {
     public void selectPersonaById(int id) {
         Persona persona = personaService.getById(id);
         if (persona != null) {
-            System.out.println("Encontrada: " + persona);
+            System.out.println("Persona encontrada:");
+            System.out.println(persona);
         } else {
-            System.out.println("❌ No se encontró ninguna persona con ID " + id);
+            System.out.println("No se encontró ninguna persona con ID " + id);
         }
     }
 
@@ -48,7 +46,7 @@ public class PersonaView {
             System.out.println("No hay personas registradas actualmente.");
         } else {
             for (Persona p : personas) {
-                System.out.println("• " + p);
+                System.out.println(p);
             }
         }
     }
@@ -58,17 +56,18 @@ public class PersonaView {
         int id = FormTypeValidator.readInt("Ingrese el ID de la persona que desea actualizar: ");
         Persona existente = personaService.getById(id);
         if (existente == null) {
-            System.out.println("❌ No existe persona con ID " + id);
+            System.out.println("No existe persona con ID " + id);
             return;
         }
 
-        String nuevoNombre = FormTypeValidator.readString("Ingrese el nuevo Nombre: ");
-        String nuevoCorreo = FormTypeValidator.readString("Ingrese el nuevo Correo: ");
-        String nuevoTelefono = FormTypeValidator.readString("Ingrese el nuevo Teléfono: ");
+        String nuevoNombre = FormTypeValidator.readStringOptional("Ingrese el nuevo Nombre", existente.getNombre());
+        String nuevoCorreo = FormTypeValidator.readStringOptional("Ingrese el nuevo Correo", existente.getCorreo());
+        String nuevoTelefono = FormTypeValidator.readStringOptional("Ingrese el nuevo Teléfono", existente.getTelefono());
 
         Persona personaActualizada = new Persona(id, nuevoNombre, nuevoCorreo, nuevoTelefono);
         personaService.update(id, personaActualizada);
-        System.out.println("✅ Persona actualizada con éxito.");
+        System.out.println("Persona actualizada con éxito:");
+        System.out.println(personaActualizada);
     }
 
     public void deletePersona() {
@@ -80,9 +79,9 @@ public class PersonaView {
     public void deletePersona(int id) {
         boolean eliminada = personaService.delete(id);
         if (eliminada) {
-            System.out.println("✅ Persona con ID " + id + " eliminada correctamente.");
+            System.out.println("Persona con ID " + id + " eliminada correctamente.");
         } else {
-            System.out.println("❌ No se pudo eliminar: ID " + id + " no encontrado.");
+            System.out.println("No se pudo eliminar: ID " + id + " no encontrado.");
         }
     }
 }

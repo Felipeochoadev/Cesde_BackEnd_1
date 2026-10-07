@@ -61,6 +61,13 @@ public class Boleto {
 
     @Override
     public String toString() {
-        return "Boleto #" + codigo + " [Asiento: " + asiento + "] - $" + precio;
+        int funcId = (funcion != null) ? funcion.getId() : 0;
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"codigo\": \"" + codigo + "\",\n" +
+               "  \"funcionId\": " + funcId + ",\n" +
+               "  \"asiento\": \"" + asiento + "\",\n" +
+               "  \"precio\": " + precio + "\n" +
+               "}";
     }
 }

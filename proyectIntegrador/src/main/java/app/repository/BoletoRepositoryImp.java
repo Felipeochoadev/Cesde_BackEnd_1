@@ -7,9 +7,11 @@ import java.util.List;
 
 public class BoletoRepositoryImp implements BoletoRepositoryPort {
     private List<Boleto> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Boleto create(Boleto boleto) {
+        boleto.setId(++currentId);
         dataSource.add(boleto);
         return boleto;
     }
@@ -33,6 +35,7 @@ public class BoletoRepositoryImp implements BoletoRepositoryPort {
     public Boleto update(int id, Boleto boleto) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                boleto.setId(id);
                 dataSource.set(i, boleto);
                 return boleto;
             }

@@ -6,7 +6,7 @@ import app.domain.Sala;
 import java.util.List;
 
 public interface FuncionServiceInterface {
-    public Funcion create(int id, Pelicula pelicula, Sala sala, String fecha, String hora);
+    public Funcion create(Pelicula pelicula, Sala sala, String fecha, String hora);
     public Funcion getById(int id);
     public List<Funcion> getAll();
     public Funcion update(int id, Funcion funcion);

@@ -66,6 +66,15 @@ public class Funcion {
 
     @Override
     public String toString() {
-        return pelicula.getTitulo() + " en " + sala.getNombre() + " (" + fecha + " " + hora + ")";
+        String peliTitulo = (pelicula != null) ? pelicula.getTitulo() : "null";
+        String salaNombre = (sala != null) ? sala.getNombre() : "null";
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"pelicula\": \"" + peliTitulo + "\",\n" +
+               "  \"sala\": \"" + salaNombre + "\",\n" +
+               "  \"fecha\": \"" + fecha + "\",\n" +
+               "  \"hora\": \"" + hora + "\",\n" +
+               "  \"precioBoleto\": " + getPrecioBoleto() + "\n" +
+               "}";
     }
 }

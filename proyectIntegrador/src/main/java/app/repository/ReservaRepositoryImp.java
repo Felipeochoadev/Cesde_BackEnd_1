@@ -7,9 +7,11 @@ import java.util.List;
 
 public class ReservaRepositoryImp implements ReservaRepositoryPort {
     private List<Reserva> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Reserva create(Reserva reserva) {
+        reserva.setId(++currentId);
         dataSource.add(reserva);
         return reserva;
     }
@@ -33,6 +35,7 @@ public class ReservaRepositoryImp implements ReservaRepositoryPort {
     public Reserva update(int id, Reserva reserva) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                reserva.setId(id);
                 dataSource.set(i, reserva);
                 return reserva;
             }

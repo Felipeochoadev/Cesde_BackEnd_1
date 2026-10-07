@@ -94,6 +94,15 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura #" + numero + " - Estado: " + (pagada ? "PAGADO" : "PENDIENTE");
+        int resId = (reserva != null) ? reserva.getId() : 0;
+        double total = (reserva != null) ? reserva.calcularTotal() : 0.0;
+        return "{\n" +
+               "  \"id\": " + id + ",\n" +
+               "  \"numero\": \"" + numero + "\",\n" +
+               "  \"reservaId\": " + resId + ",\n" +
+               "  \"metodoPago\": \"" + metodoPago + "\",\n" +
+               "  \"pagada\": " + pagada + ",\n" +
+               "  \"total\": " + total + "\n" +
+               "}";
     }
 }

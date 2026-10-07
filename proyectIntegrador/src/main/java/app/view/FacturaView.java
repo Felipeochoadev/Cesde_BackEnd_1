@@ -17,18 +17,16 @@ public class FacturaView {
 
     public void createFactura(Reserva reserva) {
         System.out.println("\n--- GENERAR FACTURA DE VENTA ---");
-        int id = FormTypeValidator.readInt("Ingrese el ID de la factura: ");
         String numero = FormTypeValidator.readString("Ingrese el Número de factura (ej: FAC-001): ");
 
-        // 🌟 Uso de SetPropertyHelper: Menú para seleccionar método de pago
         MetodoPago metodo = SetPropertyHelper.setMetodoPago();
         String metodoPago = metodo.getNombre();
 
-        // Paso 14 y 15: Pasa los parámetros capturados al create del servicio
-        Factura factura = facturaService.create(id, numero, reserva, metodoPago);
+        Factura factura = facturaService.create(numero, reserva, metodoPago);
         factura.pagar();
 
-        System.out.println("✅ Factura generada y pagada con éxito.");
+        System.out.println("Factura generada y pagada con éxito:");
+        System.out.println(factura);
         factura.imprimirFactura();
     }
 
@@ -41,10 +39,11 @@ public class FacturaView {
     public void selectFacturaById(int id) {
         Factura factura = facturaService.getById(id);
         if (factura != null) {
-            System.out.println("Encontrada: " + factura);
+            System.out.println("Factura encontrada:");
+            System.out.println(factura);
             factura.imprimirFactura();
         } else {
-            System.out.println("❌ No se encontró ninguna factura con ID " + id);
+            System.out.println("No se encontró ninguna factura con ID " + id);
         }
     }
 
@@ -55,22 +54,35 @@ public class FacturaView {
             System.out.println("No hay facturas registradas en el sistema.");
         } else {
             for (Factura f : facturas) {
-                System.out.println("• " + f);
+                System.out.println(f);
             }
         }
     }
 
     public void updateFactura(int id, Reserva nuevaReserva) {
         System.out.println("\n--- ACTUALIZAR FACTURA ID (" + id + ") ---");
-        String nuevoNumero = FormTypeValidator.readString("Ingrese el nuevo Número de factura: ");
+        Factura existente = facturaService.getById(id);
+        if (existente == null) {
+            System.out.println("No existe factura con ID " + id);
+            return;
+        }
 
-        // 🌟 Uso de SetPropertyHelper en actualización
-        MetodoPago metodo = SetPropertyHelper.setMetodoPago();
-        String nuevoMetodo = metodo.getNombre();
+        String nuevoNumero = FormTypeValidator.readStringOptional("Ingrese el nuevo Número de factura", existente.getNumero());
 
-        Factura actualizada = new Factura(id, nuevoNumero, nuevaReserva, nuevoMetodo);
+        System.out.println("¿Desea cambiar el Método de Pago? (Actual: " + existente.getMetodoPago() + ")");
+        boolean cambiarMetodo = FormTypeValidator.readBoolean("¿Desea seleccionar un nuevo método?");
+        String nuevoMetodo = existente.getMetodoPago();
+        if (cambiarMetodo) {
+            MetodoPago metodo = SetPropertyHelper.setMetodoPago();
+            nuevoMetodo = metodo.getNombre();
+        }
+
+        Reserva reservaFinal = (nuevaReserva != null) ? nuevaReserva : existente.getReserva();
+
+        Factura actualizada = new Factura(id, nuevoNumero, reservaFinal, nuevoMetodo);
         facturaService.update(id, actualizada);
-        System.out.println("✅ Factura actualizada con éxito.");
+        System.out.println("Factura actualizada con éxito:");
+        System.out.println(actualizada);
     }
 
     public void deleteFactura() {
@@ -82,9 +94,9 @@ public class FacturaView {
     public void deleteFactura(int id) {
         boolean eliminada = facturaService.delete(id);
         if (eliminada) {
-            System.out.println("✅ Factura con ID " + id + " eliminada del historial.");
+            System.out.println("Factura con ID " + id + " eliminada del historial.");
         } else {
-            System.out.println("❌ No se pudo eliminar: ID " + id + " no encontrado.");
+            System.out.println("No se pudo eliminar: ID " + id + " no encontrado.");
         }
     }
 }

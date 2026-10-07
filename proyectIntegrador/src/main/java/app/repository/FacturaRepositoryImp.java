@@ -7,9 +7,11 @@ import java.util.List;
 
 public class FacturaRepositoryImp implements FacturaRepositoryPort {
     private List<Factura> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Factura create(Factura factura) {
+        factura.setId(++currentId);
         dataSource.add(factura);
         return factura;
     }
@@ -33,6 +35,7 @@ public class FacturaRepositoryImp implements FacturaRepositoryPort {
     public Factura update(int id, Factura factura) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                factura.setId(id);
                 dataSource.set(i, factura);
                 return factura;
             }

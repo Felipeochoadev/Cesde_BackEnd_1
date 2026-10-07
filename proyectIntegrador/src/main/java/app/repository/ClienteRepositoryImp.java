@@ -7,9 +7,11 @@ import java.util.List;
 
 public class ClienteRepositoryImp implements ClienteRepositoryPort {
     private List<Cliente> dataSource = new ArrayList<>();
+    private int currentId = 0;
 
     @Override
     public Cliente create(Cliente cliente) {
+        cliente.setId(++currentId);
         dataSource.add(cliente);
         return cliente;
     }
@@ -33,6 +35,7 @@ public class ClienteRepositoryImp implements ClienteRepositoryPort {
     public Cliente update(int id, Cliente cliente) {
         for (int i = 0; i < dataSource.size(); i++) {
             if (dataSource.get(i).getId() == id) {
+                cliente.setId(id);
                 dataSource.set(i, cliente);
                 return cliente;
             }
