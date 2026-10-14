@@ -1,0 +1,150 @@
+<mxfile host="Electron">
+  <diagram id="d1" name="Recomendador de Películas">
+    <mxGraphModel dx="1975" dy="890" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="p0" parent="1" style="swimlane;fontStyle=3;align=center;startSize=30;                  fillColor=#dae8fc;strokeColor=#000000;fontSize=12;" value="&lt;&lt;abstract&gt;&gt; Persona" vertex="1">
+          <mxGeometry height="160" width="230" x="450" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="p0" style="text;strokeColor=none;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- nombre: String&#xa;- correo: String&#xa;- contrasena: String" vertex="1">
+          <mxGeometry height="60" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="p0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="230" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="p0" style="text;strokeColor=none;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ login(): void&#xa;+ logout(): void&#xa;+ getPerfil(): String" vertex="1">
+          <mxGeometry height="62" width="230" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#d5e8d4;strokeColor=#000000;fontSize=12;" value="Admin" vertex="1">
+          <mxGeometry height="185" width="250" x="90" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="a0" style="text;strokeColor=none;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- cargo: String&#xa;- permisos: String[]" vertex="1">
+          <mxGeometry height="45" width="250" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="a0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="250" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="a0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ crearPelicula(p: Pelicula): void&#xa;+ eliminarPelicula(id: int): void&#xa;+ editarPelicula(id: int): void&#xa;+ asignarCategoria(p, c): void" vertex="1">
+          <mxGeometry height="102" width="250" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="u0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#d5e8d4;strokeColor=#000000;fontSize=12;" value="Usuario" vertex="1">
+          <mxGeometry height="185" width="260" x="450" y="334" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" parent="u0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- fechaRegistro: String&#xa;- historialVisto: List" vertex="1">
+          <mxGeometry height="45" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" parent="u0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="260" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="u3" parent="u0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ darMeGusta(p: Pelicula): void&#xa;+ comentar(p: Pelicula, txt: String): void&#xa;+ verRecomendaciones(): List&#xa;+ verHistorial(): List" vertex="1">
+          <mxGeometry height="102" width="260" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="mg0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#e1d5e7;strokeColor=#000000;fontSize=12;" value="MeGusta" vertex="1">
+          <mxGeometry height="130" width="200" x="960" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="mg1" parent="mg0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- fecha: String&#xa;- activo: boolean" vertex="1">
+          <mxGeometry height="45" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mg2" parent="mg0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="200" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="mg3" parent="mg0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ getFecha(): String&#xa;+ toggleActivo(): void" vertex="1">
+          <mxGeometry height="47" width="200" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="pe0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#fff2cc;strokeColor=#000000;fontSize=12;" value="Pelicula" vertex="1">
+          <mxGeometry height="235" width="260" x="450" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="pe1" parent="pe0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- id: int&#xa;- titulo: String&#xa;- director: String&#xa;- anio: int&#xa;- sinopsis: String&#xa;- likes: int" vertex="1">
+          <mxGeometry height="120" width="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pe2" parent="pe0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="260" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="pe3" parent="pe0" style="text;strokeColor=none;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ getInfo(): String&#xa;+ calcularRating(): double&#xa;+ agregarComentario(c): void" vertex="1">
+          <mxGeometry height="77" width="260" y="158" as="geometry" />
+        </mxCell>
+        <mxCell id="cat0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#f8cecc;strokeColor=#000000;fontSize=12;" value="Categoria" vertex="1">
+          <mxGeometry height="130" width="210" x="90" y="718" as="geometry" />
+        </mxCell>
+        <mxCell id="cat1" parent="cat0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- nombre: String&#xa;- descripcion: String" vertex="1">
+          <mxGeometry height="45" width="210" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cat2" parent="cat0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="210" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="cat3" parent="cat0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ getNombre(): String&#xa;+ getDescripcion(): String" vertex="1">
+          <mxGeometry height="47" width="210" y="83" as="geometry" />
+        </mxCell>
+        <mxCell id="co0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#f8cecc;strokeColor=#000000;fontSize=12;" value="Comentario" vertex="1">
+          <mxGeometry height="165" width="230" x="465" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="co1" parent="co0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- id: int&#xa;- texto: String&#xa;- fecha: String" vertex="1">
+          <mxGeometry height="60" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="co2" parent="co0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="230" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="co3" parent="co0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ getTexto(): String&#xa;+ getFecha(): String&#xa;+ editar(txt: String): void" vertex="1">
+          <mxGeometry height="67" width="230" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="rep0" parent="1" style="swimlane;fontStyle=1;align=center;startSize=30;                  fillColor=#e1d5e7;strokeColor=#000000;fontSize=12;" value="Reproductor" vertex="1">
+          <mxGeometry height="195" width="240" x="827" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="rep1" parent="rep0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="- volumen: int&#xa;- calidad: String&#xa;- estado: String" vertex="1">
+          <mxGeometry height="60" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rep2" parent="rep0" style="line;strokeColor=#000000;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="8" width="240" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="rep3" parent="rep0" style="text;strokeColor=#000000;fillColor=none;align=left;                  verticalAlign=top;spacingLeft=8;overflow=hidden;" value="+ play(p: Pelicula): void&#xa;+ pause(): void&#xa;+ stop(): void&#xa;+ setVolumen(v: int): void" vertex="1">
+          <mxGeometry height="97" width="240" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="a2" style="endArrow=block;endFill=0;endSize=14;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" target="p2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="1" source="u0" style="endArrow=block;endFill=0;endSize=14;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" value="">
+          <mxGeometry relative="1" x="0.0084" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="580" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="1" source="pe0" style="startArrow=diamondThin;startFill=1;startSize=16;                  endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="co0" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" edge="1" parent="1" source="pe0" style="startArrow=diamondThin;startFill=0;startSize=16;                  endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="cat0" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="u0" style="startArrow=diamondThin;startFill=1;startSize=16;                  endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="mg0" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="rep0" style="endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="pe0" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" edge="1" parent="1" source="mg0" style="endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="pe0" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" edge="1" parent="1" source="a0" style="dashed=1;endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="pe0" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="215" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r9" edge="1" parent="1" style="endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="pe0" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="520" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r10" edge="1" parent="1" source="co0" style="endArrow=open;endFill=0;                  strokeColor=#000000;fontStyle=2;fontSize=10;                  labelBackgroundColor=#ffffff;" target="u0" value="">
+          <mxGeometry relative="1" x="-0.0203" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="940" />
+              <mxPoint x="360" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
