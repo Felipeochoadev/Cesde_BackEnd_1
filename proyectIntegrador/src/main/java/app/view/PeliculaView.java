@@ -2,6 +2,7 @@ package app.view;
 
 import app.domain.Pelicula;
 import app.domain.enums.GeneroPelicula;
+import app.service.helpers.JsonHelper;
 import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.PeliculaServiceInterface;
 import app.service.validations.FormTypeValidator;
@@ -27,7 +28,7 @@ public class PeliculaView {
 
         Pelicula creada = peliculaService.create(titulo, genero, duracion, precio, edadMinima);
         System.out.println("Película agregada a cartelera con éxito:");
-        System.out.println(creada);
+        System.out.println(JsonHelper.toJson(creada));
     }
 
     public void selectPeliculaById() {
@@ -40,7 +41,7 @@ public class PeliculaView {
         Pelicula pelicula = peliculaService.getById(id);
         if (pelicula != null) {
             System.out.println("Película encontrada:");
-            System.out.println(pelicula);
+            System.out.println(JsonHelper.toJson(pelicula));
         } else {
             System.out.println("No se encontró ninguna película con ID " + id);
         }
@@ -52,9 +53,7 @@ public class PeliculaView {
         if (peliculas.isEmpty()) {
             System.out.println("No hay películas registradas en cartelera.");
         } else {
-            for (Pelicula p : peliculas) {
-                System.out.println(p);
-            }
+            System.out.println(JsonHelper.toJson(peliculas));
         }
     }
 
@@ -84,7 +83,7 @@ public class PeliculaView {
         Pelicula peliculaActualizada = new Pelicula(id, nuevoTitulo, nuevoGenero, nuevaDuracion, nuevoPrecio, nuevaEdadMin);
         peliculaService.update(id, peliculaActualizada);
         System.out.println("Película actualizada con éxito:");
-        System.out.println(peliculaActualizada);
+        System.out.println(JsonHelper.toJson(peliculaActualizada));
     }
 
     public void deletePelicula() {

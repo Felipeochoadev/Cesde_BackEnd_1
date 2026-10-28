@@ -59,22 +59,8 @@ public class Funcion {
     }
 
     public double getPrecioBoleto() {
-        double precioPeli = (pelicula != null) ? pelicula.getPrecioBase() : 0;
-        double recargoSala = (sala != null) ? sala.getRecargo() : 0;
-        return precioPeli + recargoSala;
-    }
-
-    @Override
-    public String toString() {
-        String peliTitulo = (pelicula != null) ? pelicula.getTitulo() : "null";
-        String salaNombre = (sala != null) ? sala.getNombre() : "null";
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"pelicula\": \"" + peliTitulo + "\",\n" +
-               "  \"sala\": \"" + salaNombre + "\",\n" +
-               "  \"fecha\": \"" + fecha + "\",\n" +
-               "  \"hora\": \"" + hora + "\",\n" +
-               "  \"precioBoleto\": " + getPrecioBoleto() + "\n" +
-               "}";
+        double base = (pelicula != null) ? pelicula.getPrecioBase() : 0.0;
+        double recargo = (sala != null) ? sala.getRecargo() : 0.0;
+        return base + recargo;
     }
 }

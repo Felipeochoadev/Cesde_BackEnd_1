@@ -1,6 +1,7 @@
 package app.view;
 
 import app.domain.Cliente;
+import app.service.helpers.JsonHelper;
 import app.service.inputports.ClienteServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ClienteView {
 
         Cliente creado = clienteService.create(nombre, correo, telefono, edad);
         System.out.println("Cliente registrado con éxito:");
-        System.out.println(creado);
+        System.out.println(JsonHelper.toJson(creado));
     }
 
     public void selectClienteById() {
@@ -34,7 +35,7 @@ public class ClienteView {
         Cliente cliente = clienteService.getById(id);
         if (cliente != null) {
             System.out.println("Cliente encontrado:");
-            System.out.println(cliente);
+            System.out.println(JsonHelper.toJson(cliente));
         } else {
             System.out.println("No se encontró ningún cliente con ID " + id);
         }
@@ -46,9 +47,7 @@ public class ClienteView {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.");
         } else {
-            for (Cliente c : clientes) {
-                System.out.println(c);
-            }
+            System.out.println(JsonHelper.toJson(clientes));
         }
     }
 
@@ -69,7 +68,7 @@ public class ClienteView {
         Cliente clienteActualizado = new Cliente(id, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevaEdad);
         clienteService.update(id, clienteActualizado);
         System.out.println("Cliente actualizado con éxito:");
-        System.out.println(clienteActualizado);
+        System.out.println(JsonHelper.toJson(clienteActualizado));
     }
 
     public void deleteCliente() {

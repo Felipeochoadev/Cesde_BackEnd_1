@@ -71,16 +71,4 @@ public class Pelicula {
     public boolean esAptaPara(int edadCliente) {
         return edadCliente >= this.edadMinima;
     }
-
-    @Override
-    public String toString() {
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"titulo\": \"" + titulo + "\",\n" +
-               "  \"genero\": \"" + genero + "\",\n" +
-               "  \"duracionMinutos\": " + duracionMinutos + ",\n" +
-               "  \"precioBase\": " + precioBase + ",\n" +
-               "  \"edadMinima\": " + edadMinima + "\n" +
-               "}";
-    }
 }

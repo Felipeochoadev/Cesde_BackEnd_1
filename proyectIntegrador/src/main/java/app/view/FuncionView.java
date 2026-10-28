@@ -3,6 +3,7 @@ package app.view;
 import app.domain.Funcion;
 import app.domain.Pelicula;
 import app.domain.Sala;
+import app.service.helpers.JsonHelper;
 import app.service.inputports.FuncionServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -21,7 +22,7 @@ public class FuncionView {
 
         Funcion funcion = funcionService.create(pelicula, sala, fecha, hora);
         System.out.println("Función programada con éxito:");
-        System.out.println(funcion);
+        System.out.println(JsonHelper.toJson(funcion));
     }
 
     public void selectFuncionById() {
@@ -34,7 +35,7 @@ public class FuncionView {
         Funcion funcion = funcionService.getById(id);
         if (funcion != null) {
             System.out.println("Función encontrada:");
-            System.out.println(funcion);
+            System.out.println(JsonHelper.toJson(funcion));
         } else {
             System.out.println("No se encontró ninguna función con ID " + id);
         }
@@ -46,9 +47,7 @@ public class FuncionView {
         if (funciones.isEmpty()) {
             System.out.println("No hay funciones programadas actualmente.");
         } else {
-            for (Funcion f : funciones) {
-                System.out.println(f);
-            }
+            System.out.println(JsonHelper.toJson(funciones));
         }
     }
 
@@ -69,7 +68,7 @@ public class FuncionView {
         Funcion actualizada = new Funcion(id, peliculaFinal, salaFinal, nuevaFecha, nuevaHora);
         funcionService.update(id, actualizada);
         System.out.println("Función actualizada con éxito:");
-        System.out.println(actualizada);
+        System.out.println(JsonHelper.toJson(actualizada));
     }
 
     public void deleteFuncion() {

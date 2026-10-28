@@ -3,6 +3,7 @@ package app.view;
 import app.domain.Factura;
 import app.domain.Reserva;
 import app.domain.enums.MetodoPago;
+import app.service.helpers.JsonHelper;
 import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.FacturaServiceInterface;
 import app.service.validations.FormTypeValidator;
@@ -26,7 +27,7 @@ public class FacturaView {
         factura.pagar();
 
         System.out.println("Factura generada y pagada con éxito:");
-        System.out.println(factura);
+        System.out.println(JsonHelper.toJson(factura));
         factura.imprimirFactura();
     }
 
@@ -40,7 +41,7 @@ public class FacturaView {
         Factura factura = facturaService.getById(id);
         if (factura != null) {
             System.out.println("Factura encontrada:");
-            System.out.println(factura);
+            System.out.println(JsonHelper.toJson(factura));
             factura.imprimirFactura();
         } else {
             System.out.println("No se encontró ninguna factura con ID " + id);
@@ -53,9 +54,7 @@ public class FacturaView {
         if (facturas.isEmpty()) {
             System.out.println("No hay facturas registradas en el sistema.");
         } else {
-            for (Factura f : facturas) {
-                System.out.println(f);
-            }
+            System.out.println(JsonHelper.toJson(facturas));
         }
     }
 
@@ -82,7 +81,7 @@ public class FacturaView {
         Factura actualizada = new Factura(id, nuevoNumero, reservaFinal, nuevoMetodo);
         facturaService.update(id, actualizada);
         System.out.println("Factura actualizada con éxito:");
-        System.out.println(actualizada);
+        System.out.println(JsonHelper.toJson(actualizada));
     }
 
     public void deleteFactura() {

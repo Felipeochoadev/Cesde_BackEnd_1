@@ -24,15 +24,7 @@ public class Cliente extends Persona {
         return this.edad >= 18;
     }
 
-    @Override
-    public String toString() {
-        return "{\n" +
-               "  \"id\": " + getId() + ",\n" +
-               "  \"nombre\": \"" + getNombre() + "\",\n" +
-               "  \"correo\": \"" + getCorreo() + "\",\n" +
-               "  \"telefono\": \"" + getTelefono() + "\",\n" +
-               "  \"edad\": " + edad + ",\n" +
-               "  \"esMayorDeEdad\": " + esMayorDeEdad() + "\n" +
-               "}";
+    public boolean isEsMayorDeEdad() {
+        return esMayorDeEdad();
     }
 }

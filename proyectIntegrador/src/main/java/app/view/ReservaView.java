@@ -3,6 +3,7 @@ package app.view;
 import app.domain.Cliente;
 import app.domain.Funcion;
 import app.domain.Reserva;
+import app.service.helpers.JsonHelper;
 import app.service.inputports.ReservaServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ReservaView {
 
         Reserva reserva = reservaService.create(cliente, funcion, cantidadBoletos);
         System.out.println("Reserva registrada con éxito:");
-        System.out.println(reserva);
+        System.out.println(JsonHelper.toJson(reserva));
         System.out.println("Subtotal:   $" + reserva.calcularSubtotal());
         System.out.println("Descuento: -$" + reserva.calcularDescuento());
         System.out.println("Total:      $" + reserva.calcularTotal());
@@ -43,7 +44,7 @@ public class ReservaView {
         Reserva reserva = reservaService.getById(id);
         if (reserva != null) {
             System.out.println("Reserva encontrada:");
-            System.out.println(reserva);
+            System.out.println(JsonHelper.toJson(reserva));
         } else {
             System.out.println("No se encontró ninguna reserva con ID " + id);
         }
@@ -55,9 +56,7 @@ public class ReservaView {
         if (reservas.isEmpty()) {
             System.out.println("No hay reservas registradas.");
         } else {
-            for (Reserva r : reservas) {
-                System.out.println(r);
-            }
+            System.out.println(JsonHelper.toJson(reservas));
         }
     }
 
@@ -76,7 +75,7 @@ public class ReservaView {
         Reserva actualizada = new Reserva(id, clienteFinal, funcionFinal, nuevaCantidad);
         reservaService.update(id, actualizada);
         System.out.println("Reserva actualizada con éxito:");
-        System.out.println(actualizada);
+        System.out.println(JsonHelper.toJson(actualizada));
     }
 
     public void deleteReserva() {

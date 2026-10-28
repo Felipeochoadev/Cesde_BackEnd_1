@@ -2,6 +2,7 @@ package app.view;
 
 import app.domain.Sala;
 import app.domain.enums.TipoSala;
+import app.service.helpers.JsonHelper;
 import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.SalaServiceInterface;
 import app.service.validations.FormTypeValidator;
@@ -25,7 +26,7 @@ public class SalaView {
 
         Sala creada = salaService.create(nombre, capacidad, tipo, recargo);
         System.out.println("Sala registrada con éxito:");
-        System.out.println(creada);
+        System.out.println(JsonHelper.toJson(creada));
     }
 
     public void selectSalaById() {
@@ -38,7 +39,7 @@ public class SalaView {
         Sala sala = salaService.getById(id);
         if (sala != null) {
             System.out.println("Sala encontrada:");
-            System.out.println(sala);
+            System.out.println(JsonHelper.toJson(sala));
         } else {
             System.out.println("No se encontró ninguna sala con ID " + id);
         }
@@ -50,9 +51,7 @@ public class SalaView {
         if (salas.isEmpty()) {
             System.out.println("No hay salas registradas.");
         } else {
-            for (Sala s : salas) {
-                System.out.println(s);
-            }
+            System.out.println(JsonHelper.toJson(salas));
         }
     }
 
@@ -81,7 +80,7 @@ public class SalaView {
         Sala salaActualizada = new Sala(id, nuevoNombre, nuevaCapacidad, nuevoTipo, nuevoRecargo);
         salaService.update(id, salaActualizada);
         System.out.println("Sala actualizada con éxito:");
-        System.out.println(salaActualizada);
+        System.out.println(JsonHelper.toJson(salaActualizada));
     }
 
     public void deleteSala() {

@@ -2,6 +2,7 @@ package app.view;
 
 import app.domain.Boleto;
 import app.domain.Funcion;
+import app.service.helpers.JsonHelper;
 import app.service.inputports.BoletoServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -20,7 +21,7 @@ public class BoletoView {
 
         Boleto creado = boletoService.create(codigo, funcion, asiento);
         System.out.println("Boleto emitido con éxito:");
-        System.out.println(creado);
+        System.out.println(JsonHelper.toJson(creado));
     }
 
     public void selectBoletoById() {
@@ -33,7 +34,7 @@ public class BoletoView {
         Boleto boleto = boletoService.getById(id);
         if (boleto != null) {
             System.out.println("Boleto encontrado:");
-            System.out.println(boleto);
+            System.out.println(JsonHelper.toJson(boleto));
         } else {
             System.out.println("No se encontró ningún boleto con ID " + id);
         }
@@ -45,9 +46,7 @@ public class BoletoView {
         if (boletos.isEmpty()) {
             System.out.println("No hay boletos emitidos actualmente.");
         } else {
-            for (Boleto b : boletos) {
-                System.out.println(b);
-            }
+            System.out.println(JsonHelper.toJson(boletos));
         }
     }
 
@@ -66,7 +65,7 @@ public class BoletoView {
         Boleto actualizado = new Boleto(id, nuevoCodigo, funcionFinal, nuevoAsiento);
         boletoService.update(id, actualizado);
         System.out.println("Boleto actualizado con éxito:");
-        System.out.println(actualizado);
+        System.out.println(JsonHelper.toJson(actualizado));
     }
 
     public void deleteBoleto() {

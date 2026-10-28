@@ -15,7 +15,7 @@ public class Boleto {
         this.codigo = codigo;
         this.funcion = funcion;
         this.asiento = asiento;
-        this.precio = (funcion != null) ? funcion.getPrecioBoleto() : 0;
+        this.precio = (funcion != null) ? funcion.getPrecioBoleto() : 0.0;
     }
 
     public int getId() {
@@ -40,7 +40,9 @@ public class Boleto {
 
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
-        this.precio = (funcion != null) ? funcion.getPrecioBoleto() : 0;
+        if (funcion != null) {
+            this.precio = funcion.getPrecioBoleto();
+        }
     }
 
     public String getAsiento() {
@@ -57,17 +59,5 @@ public class Boleto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
-    }
-
-    @Override
-    public String toString() {
-        int funcId = (funcion != null) ? funcion.getId() : 0;
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"codigo\": \"" + codigo + "\",\n" +
-               "  \"funcionId\": " + funcId + ",\n" +
-               "  \"asiento\": \"" + asiento + "\",\n" +
-               "  \"precio\": " + precio + "\n" +
-               "}";
     }
 }

@@ -57,15 +57,4 @@ public class Sala {
     public void setRecargo(double recargo) {
         this.recargo = recargo;
     }
-
-    @Override
-    public String toString() {
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"nombre\": \"" + nombre + "\",\n" +
-               "  \"capacidad\": " + capacidad + ",\n" +
-               "  \"tipo\": \"" + tipo + "\",\n" +
-               "  \"recargo\": " + recargo + "\n" +
-               "}";
-    }
 }

@@ -1,6 +1,7 @@
 package app.view;
 
 import app.domain.Persona;
+import app.service.helpers.JsonHelper;
 import app.service.inputports.PersonaServiceInterface;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
@@ -20,7 +21,7 @@ public class PersonaView {
 
         Persona creada = personaService.create(nombre, correo, telefono);
         System.out.println("Persona registrada con éxito:");
-        System.out.println(creada);
+        System.out.println(JsonHelper.toJson(creada));
     }
 
     public void selectPersonaById() {
@@ -33,7 +34,7 @@ public class PersonaView {
         Persona persona = personaService.getById(id);
         if (persona != null) {
             System.out.println("Persona encontrada:");
-            System.out.println(persona);
+            System.out.println(JsonHelper.toJson(persona));
         } else {
             System.out.println("No se encontró ninguna persona con ID " + id);
         }
@@ -45,9 +46,7 @@ public class PersonaView {
         if (personas.isEmpty()) {
             System.out.println("No hay personas registradas actualmente.");
         } else {
-            for (Persona p : personas) {
-                System.out.println(p);
-            }
+            System.out.println(JsonHelper.toJson(personas));
         }
     }
 
@@ -67,7 +66,7 @@ public class PersonaView {
         Persona personaActualizada = new Persona(id, nuevoNombre, nuevoCorreo, nuevoTelefono);
         personaService.update(id, personaActualizada);
         System.out.println("Persona actualizada con éxito:");
-        System.out.println(personaActualizada);
+        System.out.println(JsonHelper.toJson(personaActualizada));
     }
 
     public void deletePersona() {

@@ -8,7 +8,6 @@ public class Reserva {
     private String estado;
 
     public Reserva() {
-        this.estado = "Pendiente";
     }
 
     public Reserva(int id, Cliente cliente, Funcion funcion, int cantidadBoletos) {
@@ -59,19 +58,37 @@ public class Reserva {
         this.estado = estado;
     }
 
+    public double getSubtotal() {
+        return calcularSubtotal();
+    }
+
+    public double getDescuento() {
+        return calcularDescuento();
+    }
+
+    public double getTotal() {
+        return calcularTotal();
+    }
+
+    public boolean isValidaPorEdad() {
+        return esValidaPorEdad();
+    }
+
     public double calcularSubtotal() {
         if (funcion != null) {
             return funcion.getPrecioBoleto() * cantidadBoletos;
         }
-        return 0;
+        return 0.0;
     }
 
     public double calcularDescuento() {
         double subtotal = calcularSubtotal();
-        if (cantidadBoletos > 4 || (cliente != null && cliente.getEdad() < 12)) {
+        if (cantidadBoletos >= 5) {
+            return subtotal * 0.15;
+        } else if (cantidadBoletos >= 3) {
             return subtotal * 0.10;
         }
-        return 0;
+        return 0.0;
     }
 
     public double calcularTotal() {
@@ -79,10 +96,10 @@ public class Reserva {
     }
 
     public boolean esValidaPorEdad() {
-        if (cliente != null && funcion != null && funcion.getPelicula() != null) {
-            return funcion.getPelicula().esAptaPara(cliente.getEdad());
+        if (cliente == null || funcion == null || funcion.getPelicula() == null) {
+            return false;
         }
-        return false;
+        return funcion.getPelicula().esAptaPara(cliente.getEdad());
     }
 
     public void confirmar() {
@@ -91,22 +108,5 @@ public class Reserva {
         } else {
             System.out.println("No se puede confirmar la reserva: el cliente no cumple con la edad mínima.");
         }
-    }
-
-    @Override
-    public String toString() {
-        String clienteNombre = (cliente != null) ? cliente.getNombre() : "null";
-        String peliculaTitulo = (funcion != null && funcion.getPelicula() != null) ? funcion.getPelicula().getTitulo() : "null";
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"cliente\": \"" + clienteNombre + "\",\n" +
-               "  \"pelicula\": \"" + peliculaTitulo + "\",\n" +
-               "  \"cantidadBoletos\": " + cantidadBoletos + ",\n" +
-               "  \"subtotal\": " + calcularSubtotal() + ",\n" +
-               "  \"descuento\": " + calcularDescuento() + ",\n" +
-               "  \"total\": " + calcularTotal() + ",\n" +
-               "  \"estado\": \"" + estado + "\",\n" +
-               "  \"esValidaPorEdad\": " + esValidaPorEdad() + "\n" +
-               "}";
     }
 }

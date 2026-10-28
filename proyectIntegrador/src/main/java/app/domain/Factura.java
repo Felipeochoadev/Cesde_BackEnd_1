@@ -58,6 +58,10 @@ public class Factura {
         this.pagada = pagada;
     }
 
+    public double getTotal() {
+        return (reserva != null) ? reserva.calcularTotal() : 0.0;
+    }
+
     public void pagar() {
         if (reserva != null && reserva.esValidaPorEdad()) {
             this.pagada = true;
@@ -90,19 +94,5 @@ public class Factura {
         System.out.println("Método Pago:   " + metodoPago);
         System.out.println("Estado:        " + (pagada ? "PAGADO" : "PENDIENTE"));
         System.out.println("----------------------------------------\n");
-    }
-
-    @Override
-    public String toString() {
-        int resId = (reserva != null) ? reserva.getId() : 0;
-        double total = (reserva != null) ? reserva.calcularTotal() : 0.0;
-        return "{\n" +
-               "  \"id\": " + id + ",\n" +
-               "  \"numero\": \"" + numero + "\",\n" +
-               "  \"reservaId\": " + resId + ",\n" +
-               "  \"metodoPago\": \"" + metodoPago + "\",\n" +
-               "  \"pagada\": " + pagada + ",\n" +
-               "  \"total\": " + total + "\n" +
-               "}";
     }
 }
