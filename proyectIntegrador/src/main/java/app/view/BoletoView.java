@@ -2,8 +2,10 @@ package app.view;
 
 import app.domain.Boleto;
 import app.domain.Funcion;
+import app.service.dto.BoletoResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.inputports.BoletoServiceInterface;
+import app.service.mappers.BoletoDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class BoletoView {
         String asiento = FormTypeValidator.readString("Ingrese el Asiento (ej: F5, A1): ");
 
         Boleto creado = boletoService.create(codigo, funcion, asiento);
+        BoletoResponseDTO dto = BoletoDTOMapper.toResponseDTO(creado);
         System.out.println("Boleto emitido con éxito:");
-        System.out.println(JsonHelper.toJson(creado));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void selectBoletoById() {
@@ -33,8 +36,9 @@ public class BoletoView {
     public void selectBoletoById(int id) {
         Boleto boleto = boletoService.getById(id);
         if (boleto != null) {
+            BoletoResponseDTO dto = BoletoDTOMapper.toResponseDTO(boleto);
             System.out.println("Boleto encontrado:");
-            System.out.println(JsonHelper.toJson(boleto));
+            System.out.println(JsonHelper.toJson(dto));
         } else {
             System.out.println("No se encontró ningún boleto con ID " + id);
         }
@@ -46,7 +50,8 @@ public class BoletoView {
         if (boletos.isEmpty()) {
             System.out.println("No hay boletos emitidos actualmente.");
         } else {
-            System.out.println(JsonHelper.toJson(boletos));
+            List<BoletoResponseDTO> dtos = BoletoDTOMapper.toResponseDTOList(boletos);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -64,8 +69,9 @@ public class BoletoView {
 
         Boleto actualizado = new Boleto(id, nuevoCodigo, funcionFinal, nuevoAsiento);
         boletoService.update(id, actualizado);
+        BoletoResponseDTO dto = BoletoDTOMapper.toResponseDTO(actualizado);
         System.out.println("Boleto actualizado con éxito:");
-        System.out.println(JsonHelper.toJson(actualizado));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deleteBoleto() {

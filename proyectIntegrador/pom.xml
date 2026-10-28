@@ -15,10 +15,18 @@
     </properties>
 
     <dependencies>
+        <!-- Serialización JSON profesional -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.18.0</version>
+        </dependency>
+
+        <!-- Driver JDBC para Microsoft SQL Server / Azure SQL Database -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.8.1.jre11</version>
         </dependency>
     </dependencies>
 

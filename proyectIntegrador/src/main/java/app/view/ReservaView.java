@@ -3,8 +3,10 @@ package app.view;
 import app.domain.Cliente;
 import app.domain.Funcion;
 import app.domain.Reserva;
+import app.service.dto.ReservaResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.inputports.ReservaServiceInterface;
+import app.service.mappers.ReservaDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -27,8 +29,9 @@ public class ReservaView {
         }
 
         Reserva reserva = reservaService.create(cliente, funcion, cantidadBoletos);
+        ReservaResponseDTO dto = ReservaDTOMapper.toResponseDTO(reserva);
         System.out.println("Reserva registrada con éxito:");
-        System.out.println(JsonHelper.toJson(reserva));
+        System.out.println(JsonHelper.toJson(dto));
         System.out.println("Subtotal:   $" + reserva.calcularSubtotal());
         System.out.println("Descuento: -$" + reserva.calcularDescuento());
         System.out.println("Total:      $" + reserva.calcularTotal());
@@ -43,8 +46,9 @@ public class ReservaView {
     public void selectReservaById(int id) {
         Reserva reserva = reservaService.getById(id);
         if (reserva != null) {
+            ReservaResponseDTO dto = ReservaDTOMapper.toResponseDTO(reserva);
             System.out.println("Reserva encontrada:");
-            System.out.println(JsonHelper.toJson(reserva));
+            System.out.println(JsonHelper.toJson(dto));
         } else {
             System.out.println("No se encontró ninguna reserva con ID " + id);
         }
@@ -56,7 +60,8 @@ public class ReservaView {
         if (reservas.isEmpty()) {
             System.out.println("No hay reservas registradas.");
         } else {
-            System.out.println(JsonHelper.toJson(reservas));
+            List<ReservaResponseDTO> dtos = ReservaDTOMapper.toResponseDTOList(reservas);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -74,8 +79,9 @@ public class ReservaView {
 
         Reserva actualizada = new Reserva(id, clienteFinal, funcionFinal, nuevaCantidad);
         reservaService.update(id, actualizada);
+        ReservaResponseDTO dto = ReservaDTOMapper.toResponseDTO(actualizada);
         System.out.println("Reserva actualizada con éxito:");
-        System.out.println(JsonHelper.toJson(actualizada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deleteReserva() {

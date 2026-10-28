@@ -1,8 +1,10 @@
 package app.view;
 
 import app.domain.Cliente;
+import app.service.dto.ClienteResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.inputports.ClienteServiceInterface;
+import app.service.mappers.ClienteDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -21,8 +23,9 @@ public class ClienteView {
         int edad = FormTypeValidator.readInt("Ingrese la Edad: ");
 
         Cliente creado = clienteService.create(nombre, correo, telefono, edad);
+        ClienteResponseDTO responseDTO = ClienteDTOMapper.toResponseDTO(creado);
         System.out.println("Cliente registrado con éxito:");
-        System.out.println(JsonHelper.toJson(creado));
+        System.out.println(JsonHelper.toJson(responseDTO));
     }
 
     public void selectClienteById() {
@@ -34,8 +37,9 @@ public class ClienteView {
     public void selectClienteById(int id) {
         Cliente cliente = clienteService.getById(id);
         if (cliente != null) {
+            ClienteResponseDTO responseDTO = ClienteDTOMapper.toResponseDTO(cliente);
             System.out.println("Cliente encontrado:");
-            System.out.println(JsonHelper.toJson(cliente));
+            System.out.println(JsonHelper.toJson(responseDTO));
         } else {
             System.out.println("No se encontró ningún cliente con ID " + id);
         }
@@ -47,7 +51,8 @@ public class ClienteView {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados.");
         } else {
-            System.out.println(JsonHelper.toJson(clientes));
+            List<ClienteResponseDTO> responseDTOs = ClienteDTOMapper.toResponseDTOList(clientes);
+            System.out.println(JsonHelper.toJson(responseDTOs));
         }
     }
 
@@ -67,8 +72,9 @@ public class ClienteView {
 
         Cliente clienteActualizado = new Cliente(id, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevaEdad);
         clienteService.update(id, clienteActualizado);
+        ClienteResponseDTO responseDTO = ClienteDTOMapper.toResponseDTO(clienteActualizado);
         System.out.println("Cliente actualizado con éxito:");
-        System.out.println(JsonHelper.toJson(clienteActualizado));
+        System.out.println(JsonHelper.toJson(responseDTO));
     }
 
     public void deleteCliente() {

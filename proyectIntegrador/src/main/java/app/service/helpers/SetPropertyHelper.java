@@ -1,10 +1,6 @@
 package app.service.helpers;
 
-import app.domain.enums.EstadoReserva;
-import app.domain.enums.GeneroPelicula;
-import app.domain.enums.MetodoPago;
-import app.domain.enums.OpcionMenuCliente;
-import app.domain.enums.TipoSala;
+import app.domain.enums.*;
 import app.service.validations.FormTypeValidator;
 
 public class SetPropertyHelper {
@@ -12,15 +8,131 @@ public class SetPropertyHelper {
     public static OpcionMenuCliente setOpcionMenuCliente() {
         System.out.println("\n=== MENÚ DE GESTIÓN DE CLIENTES ===");
         OpcionMenuCliente[] opciones = OpcionMenuCliente.values();
-        
-        // Muestra cada opción en su propio salto de línea con su código y descripción
         for (OpcionMenuCliente op : opciones) {
             System.out.println(op.getCodigo() + ". " + op.getDescripcion());
         }
-
         while (true) {
             int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
             for (OpcionMenuCliente op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuPersona setOpcionMenuPersona() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE PERSONAS ===");
+        OpcionMenuPersona[] opciones = OpcionMenuPersona.values();
+        for (OpcionMenuPersona op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuPersona op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuPelicula setOpcionMenuPelicula() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE PELÍCULAS ===");
+        OpcionMenuPelicula[] opciones = OpcionMenuPelicula.values();
+        for (OpcionMenuPelicula op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuPelicula op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuSala setOpcionMenuSala() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE SALAS ===");
+        OpcionMenuSala[] opciones = OpcionMenuSala.values();
+        for (OpcionMenuSala op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuSala op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuFuncion setOpcionMenuFuncion() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE FUNCIONES ===");
+        OpcionMenuFuncion[] opciones = OpcionMenuFuncion.values();
+        for (OpcionMenuFuncion op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuFuncion op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuBoleto setOpcionMenuBoleto() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE BOLETOS ===");
+        OpcionMenuBoleto[] opciones = OpcionMenuBoleto.values();
+        for (OpcionMenuBoleto op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuBoleto op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuReserva setOpcionMenuReserva() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE RESERVAS ===");
+        OpcionMenuReserva[] opciones = OpcionMenuReserva.values();
+        for (OpcionMenuReserva op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuReserva op : opciones) {
+                if (op.getCodigo() == seleccion) {
+                    return op;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + opciones.length);
+        }
+    }
+
+    public static OpcionMenuFactura setOpcionMenuFactura() {
+        System.out.println("\n=== MENÚ DE GESTIÓN DE FACTURAS ===");
+        OpcionMenuFactura[] opciones = OpcionMenuFactura.values();
+        for (OpcionMenuFactura op : opciones) {
+            System.out.println(op.getCodigo() + ". " + op.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione una opción (1-" + opciones.length + "): ");
+            for (OpcionMenuFactura op : opciones) {
                 if (op.getCodigo() == seleccion) {
                     return op;
                 }
@@ -90,6 +202,40 @@ public class SetPropertyHelper {
                 return estados[opcion - 1];
             }
             System.out.println("Opción inválida. Ingrese un número entre 1 y " + estados.length);
+        }
+    }
+
+    public static ModuloSistema setModuloSistema() {
+        System.out.println("\n==================================================");
+        System.out.println("          MENÚ PRINCIPAL - CINEMAX CESDE");
+        System.out.println("==================================================");
+        ModuloSistema[] modulos = ModuloSistema.values();
+        for (ModuloSistema mod : modulos) {
+            System.out.println(mod.getCodigo() + ". " + mod.getDescripcion());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione un módulo (1-" + modulos.length + "): ");
+            for (ModuloSistema mod : modulos) {
+                if (mod.getCodigo() == seleccion) {
+                    return mod;
+                }
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + modulos.length);
+        }
+    }
+
+    public static Ambiente setAmbiente() {
+        System.out.println("\n=== CONFIGURAR AMBIENTE GLOBAL DE PERSISTENCIA ===");
+        Ambiente[] ambientes = Ambiente.values();
+        for (int i = 0; i < ambientes.length; i++) {
+            System.out.println((i + 1) + ". " + ambientes[i].name());
+        }
+        while (true) {
+            int seleccion = FormTypeValidator.readInt("Seleccione el nuevo ambiente (1-" + ambientes.length + "): ");
+            if (seleccion >= 1 && seleccion <= ambientes.length) {
+                return ambientes[seleccion - 1];
+            }
+            System.out.println("Opción inválida. Ingrese un número entre 1 y " + ambientes.length);
         }
     }
 }

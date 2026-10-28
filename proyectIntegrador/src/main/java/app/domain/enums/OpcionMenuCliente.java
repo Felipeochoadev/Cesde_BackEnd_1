@@ -6,7 +6,7 @@ public enum OpcionMenuCliente {
     LISTAR_TODOS(3, "Listar todos los clientes"),
     ACTUALIZAR(4, "Actualizar cliente"),
     ELIMINAR(5, "Eliminar cliente"),
-    SALIR(6, "Salir del sistema");
+    SALIR(6, "Volver al menú principal");
 
     private final int codigo;
     private final String descripcion;

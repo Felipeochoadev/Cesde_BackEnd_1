@@ -3,8 +3,10 @@ package app.view;
 import app.domain.Funcion;
 import app.domain.Pelicula;
 import app.domain.Sala;
+import app.service.dto.FuncionResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.inputports.FuncionServiceInterface;
+import app.service.mappers.FuncionDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -21,8 +23,9 @@ public class FuncionView {
         String hora = FormTypeValidator.readString("Ingrese la Hora (HH:MM): ");
 
         Funcion funcion = funcionService.create(pelicula, sala, fecha, hora);
+        FuncionResponseDTO dto = FuncionDTOMapper.toResponseDTO(funcion);
         System.out.println("Función programada con éxito:");
-        System.out.println(JsonHelper.toJson(funcion));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void selectFuncionById() {
@@ -34,8 +37,9 @@ public class FuncionView {
     public void selectFuncionById(int id) {
         Funcion funcion = funcionService.getById(id);
         if (funcion != null) {
+            FuncionResponseDTO dto = FuncionDTOMapper.toResponseDTO(funcion);
             System.out.println("Función encontrada:");
-            System.out.println(JsonHelper.toJson(funcion));
+            System.out.println(JsonHelper.toJson(dto));
         } else {
             System.out.println("No se encontró ninguna función con ID " + id);
         }
@@ -47,7 +51,8 @@ public class FuncionView {
         if (funciones.isEmpty()) {
             System.out.println("No hay funciones programadas actualmente.");
         } else {
-            System.out.println(JsonHelper.toJson(funciones));
+            List<FuncionResponseDTO> dtos = FuncionDTOMapper.toResponseDTOList(funciones);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -67,8 +72,9 @@ public class FuncionView {
 
         Funcion actualizada = new Funcion(id, peliculaFinal, salaFinal, nuevaFecha, nuevaHora);
         funcionService.update(id, actualizada);
+        FuncionResponseDTO dto = FuncionDTOMapper.toResponseDTO(actualizada);
         System.out.println("Función actualizada con éxito:");
-        System.out.println(JsonHelper.toJson(actualizada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deleteFuncion() {

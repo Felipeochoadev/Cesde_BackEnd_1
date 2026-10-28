@@ -2,9 +2,11 @@ package app.view;
 
 import app.domain.Sala;
 import app.domain.enums.TipoSala;
+import app.service.dto.SalaResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.SalaServiceInterface;
+import app.service.mappers.SalaDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -25,8 +27,9 @@ public class SalaView {
         double recargo = tipoSala.getRecargo();
 
         Sala creada = salaService.create(nombre, capacidad, tipo, recargo);
+        SalaResponseDTO dto = SalaDTOMapper.toResponseDTO(creada);
         System.out.println("Sala registrada con éxito:");
-        System.out.println(JsonHelper.toJson(creada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void selectSalaById() {
@@ -38,8 +41,9 @@ public class SalaView {
     public void selectSalaById(int id) {
         Sala sala = salaService.getById(id);
         if (sala != null) {
+            SalaResponseDTO dto = SalaDTOMapper.toResponseDTO(sala);
             System.out.println("Sala encontrada:");
-            System.out.println(JsonHelper.toJson(sala));
+            System.out.println(JsonHelper.toJson(dto));
         } else {
             System.out.println("No se encontró ninguna sala con ID " + id);
         }
@@ -51,7 +55,8 @@ public class SalaView {
         if (salas.isEmpty()) {
             System.out.println("No hay salas registradas.");
         } else {
-            System.out.println(JsonHelper.toJson(salas));
+            List<SalaResponseDTO> dtos = SalaDTOMapper.toResponseDTOList(salas);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -79,8 +84,9 @@ public class SalaView {
 
         Sala salaActualizada = new Sala(id, nuevoNombre, nuevaCapacidad, nuevoTipo, nuevoRecargo);
         salaService.update(id, salaActualizada);
+        SalaResponseDTO dto = SalaDTOMapper.toResponseDTO(salaActualizada);
         System.out.println("Sala actualizada con éxito:");
-        System.out.println(JsonHelper.toJson(salaActualizada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deleteSala() {

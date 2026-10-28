@@ -1,8 +1,10 @@
 package app.view;
 
 import app.domain.Persona;
+import app.service.dto.PersonaResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.inputports.PersonaServiceInterface;
+import app.service.mappers.PersonaDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class PersonaView {
         String telefono = FormTypeValidator.readString("Ingrese el Teléfono: ");
 
         Persona creada = personaService.create(nombre, correo, telefono);
+        PersonaResponseDTO dto = PersonaDTOMapper.toResponseDTO(creada);
         System.out.println("Persona registrada con éxito:");
-        System.out.println(JsonHelper.toJson(creada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void selectPersonaById() {
@@ -33,8 +36,9 @@ public class PersonaView {
     public void selectPersonaById(int id) {
         Persona persona = personaService.getById(id);
         if (persona != null) {
+            PersonaResponseDTO dto = PersonaDTOMapper.toResponseDTO(persona);
             System.out.println("Persona encontrada:");
-            System.out.println(JsonHelper.toJson(persona));
+            System.out.println(JsonHelper.toJson(dto));
         } else {
             System.out.println("No se encontró ninguna persona con ID " + id);
         }
@@ -46,7 +50,8 @@ public class PersonaView {
         if (personas.isEmpty()) {
             System.out.println("No hay personas registradas actualmente.");
         } else {
-            System.out.println(JsonHelper.toJson(personas));
+            List<PersonaResponseDTO> dtos = PersonaDTOMapper.toResponseDTOList(personas);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -65,8 +70,9 @@ public class PersonaView {
 
         Persona personaActualizada = new Persona(id, nuevoNombre, nuevoCorreo, nuevoTelefono);
         personaService.update(id, personaActualizada);
+        PersonaResponseDTO dto = PersonaDTOMapper.toResponseDTO(personaActualizada);
         System.out.println("Persona actualizada con éxito:");
-        System.out.println(JsonHelper.toJson(personaActualizada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deletePersona() {

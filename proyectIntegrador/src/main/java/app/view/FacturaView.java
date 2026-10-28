@@ -3,9 +3,11 @@ package app.view;
 import app.domain.Factura;
 import app.domain.Reserva;
 import app.domain.enums.MetodoPago;
+import app.service.dto.FacturaResponseDTO;
 import app.service.helpers.JsonHelper;
 import app.service.helpers.SetPropertyHelper;
 import app.service.inputports.FacturaServiceInterface;
+import app.service.mappers.FacturaDTOMapper;
 import app.service.validations.FormTypeValidator;
 import java.util.List;
 
@@ -26,8 +28,9 @@ public class FacturaView {
         Factura factura = facturaService.create(numero, reserva, metodoPago);
         factura.pagar();
 
+        FacturaResponseDTO dto = FacturaDTOMapper.toResponseDTO(factura);
         System.out.println("Factura generada y pagada con éxito:");
-        System.out.println(JsonHelper.toJson(factura));
+        System.out.println(JsonHelper.toJson(dto));
         factura.imprimirFactura();
     }
 
@@ -40,8 +43,9 @@ public class FacturaView {
     public void selectFacturaById(int id) {
         Factura factura = facturaService.getById(id);
         if (factura != null) {
+            FacturaResponseDTO dto = FacturaDTOMapper.toResponseDTO(factura);
             System.out.println("Factura encontrada:");
-            System.out.println(JsonHelper.toJson(factura));
+            System.out.println(JsonHelper.toJson(dto));
             factura.imprimirFactura();
         } else {
             System.out.println("No se encontró ninguna factura con ID " + id);
@@ -54,7 +58,8 @@ public class FacturaView {
         if (facturas.isEmpty()) {
             System.out.println("No hay facturas registradas en el sistema.");
         } else {
-            System.out.println(JsonHelper.toJson(facturas));
+            List<FacturaResponseDTO> dtos = FacturaDTOMapper.toResponseDTOList(facturas);
+            System.out.println(JsonHelper.toJson(dtos));
         }
     }
 
@@ -80,8 +85,9 @@ public class FacturaView {
 
         Factura actualizada = new Factura(id, nuevoNumero, reservaFinal, nuevoMetodo);
         facturaService.update(id, actualizada);
+        FacturaResponseDTO dto = FacturaDTOMapper.toResponseDTO(actualizada);
         System.out.println("Factura actualizada con éxito:");
-        System.out.println(JsonHelper.toJson(actualizada));
+        System.out.println(JsonHelper.toJson(dto));
     }
 
     public void deleteFactura() {
